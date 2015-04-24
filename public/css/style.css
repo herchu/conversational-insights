@@ -63,3 +63,13 @@ rect {
 .modal-backdrop {
     z-index: 0;
 }
+
+.results > .row {
+  clear: left;
+}
+
+#vizcontainer svg {
+  min-width: 480px;
+  width: 100%;
+  height: 100%;
+}

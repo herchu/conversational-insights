@@ -88,7 +88,6 @@ ToneAnalyzer.prototype.synonym = function(params, callback) {
     json: true,
     headers: {
       'Authorization': this.auth,
-      'Content-type': 'text/plain'
     }
   };
 

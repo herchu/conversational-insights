@@ -20,33 +20,61 @@ var express = require('express');
 var app = express();
 var watson = require('watson-developer-cloud');
 var ToneAnalyzer = require('./tone-analyzer');
+var TwitterHelper = require('./twitter-helper');
+var config = require('./config');
+
 // Bootstrap application settings
 require('./config/express')(app);
 
 
+var twitterHelper = new TwitterHelper(config.twitter);
 
 var personalityInsights = watson.personality_insights({
   version: 'v2',
-  username: '<username>',
-  password: '<password>'
+  username: 'bd342b24-1a0b-410a-ba8f-49c941f5f46a',
+  password: 'IPrLqcrllemV'
 });
 
 var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
   url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
-  username: '<username>',
-  password: '<password>'
+  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
+  password: 'SVciCpwt0b8x'
 });
 
+var toneAnalyzer = new ToneAnalyzer({
+  version: 'v1',
+  url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
+  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
+  password: 'SVciCpwt0b8x'
+});
 
 app.get('/', function(req, res) {
   res.render('index');
 });
 
-// concept insights REST calls
 app.get('/profile', function(req, res, next) {
-  // get twitter profile
-  personalityInsights.profile(req.query, function(err, results) {
+  twitterHelper.showUser(req.query.username,function(err, user){
+    if (err)
+      return next(err);
+
+    twitterHelper.getTweets(req.query.username,function(err, tweets){
+      if (err)
+        return next(err);
+
+      personalityInsights.profile({contentItems:tweets}, function(err, results) {
+        if (err)
+          return next(err);
+        else
+          return res.json(results);
+      });
+    });
+  });
+});
+
+app.post('/tone', function(req, res, next) {
+  // get the message tone
+  toneAnalyzer.tone(req.body, function(err, results) {
     if (err)
       return next(err);
     else
@@ -54,12 +82,9 @@ app.get('/profile', function(req, res, next) {
   });
 });
 
-
-
-
-app.get('/tone', function(req, res, next) {
+app.post('/synonym', function(req, res, next) {
   // get the message tone
-  toneAnalyzer.tone(req.query, function(err, results) {
+  toneAnalyzer.tone(req.body, function(err, results) {
     if (err)
       return next(err);
     else
@@ -76,8 +101,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log(err);
   var error = {
-    code: err.code || 500,
+    code: err.statusCode || err.code || 500,
     error: err.message || error.error
   };
   res.status(error.code).json(error);

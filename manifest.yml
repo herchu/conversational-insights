@@ -6,7 +6,7 @@ declared-services:
 applications:
 - services:
   - personality-insights-service
-  name: secretary
+  name: secretary-ny
   command: node app.js
   path: .
   memory: 128M

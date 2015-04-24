@@ -9,8 +9,8 @@ block row-content
             div.form-group.row
               div.col-lg-2.col-md-2.col-xs-4
                 label(for='to') To:
-              div.to.col-lg-10.col-md-10.col-xs-8
-                input.form-control(id='to', type='text', placeholder='@...')
+              div.col-lg-10.col-md-10.col-xs-8
+                input.to.form-control(id='to', type='text', placeholder='@...')
             div.form-group.row
               div.col-lg-2.col-md-2.col-xs-4
                 label(for='message') Message:
@@ -18,11 +18,27 @@ block row-content
                 textarea#message.message.form-control(name='message', rows='10', placeholder='Please enter the text to analyze ...', required='true')
             div.form-group.row
               div.col-lg-2.col-lg-offset-8.col-md-2.col-md-offset-8.col-xs-4.col-xs-offset-4
-                a.btn.btn-block.btn-default(role='button', onclick='clearMessage()') Clear
+                a.btn.btn-block.btn-defaultclean-btn(role='button') Clear
               div.col-lg-2.col-md-2.col-xs-4
-                a.btn.btn-block(role='button', onclick='doAnalysis()') Analyze
+                a.btn.btn-block.analysis-btn(role='button') Analyze
     div.col-lg-4.col-md-4.col-xs-6
-      h3 Personality
+      div.form-group.row.pi-loading.text-center.loading(style='display:none;')
+        h2 &nbsp;
+        img(src='images/watson-gray.gif')
+      div.form-group.row.pi-error(style='display: none;')
+        h2 &nbsp;
+        div.well
+          p.pi-errorMsg
+      div.pi-results(style='display: none;')
+        h3(style='height: 29px;') Your Personality*
+        div.well
+          div.summary-div
+          div.text-right(style='color: gray')
+            em.small *Compared to most people who participated in our surveys.
+      div.pi-results(style='display: none;')
+        h3 Visualization of Personality Data
+        div.well#vizcontainer
+
   div.row(style='margin-top:15px;')
     div.col-lg-12
       div.row.loading(style='display:none')

@@ -43,25 +43,25 @@ $(function() {
 
 
 // clear the message and result page
-function clearInput() {
+$('.clean-btn').click(function(){
   $message.val('');
   $tone_rslts.hide();
   $synonyms.hide();
-}
+});
 
-function doAnalysis() {
+$('.analysis-btn').click(function(){
   $loading.show();
   $tone_rslts.hide();
 
   var text = $message.val();
 
   // GET /tone with the text to get words matched with LIWC categories
-  $.get('/tone', {
+  $.post('/tone', {
     text: text
   }, function(response) {
     doToneCheck(response, text);
   });
-}
+});
 
 /**
  * start tone check.
@@ -140,7 +140,7 @@ function setupSynonymExpansion() {
     $('.synonymTabs').empty();
     $('.synonymTabContent').empty();
 
-    $.get('/synonym', { words: word, limit: 4}, function(response) {
+    $.post('/synonym', { words: [word], limit: 4}, function(response) {
         processSynonym(word, response);
     });
   });
@@ -155,7 +155,7 @@ function processSynonym(word, allSyns) {
     '</b>.<br/>Positive correlations with each trait are shown in blue, ' +
     'negative correlations are red.</div>');
 
-  allSyns.forEach(function(ele) {
+  $.each(allSyns.children,function(_, ele) {
     var tabContentTempl = '<h3>Trait: TRAIT_ID_TO_REPLACE</h3>'+
       '<div role="tabpanel" class="tab-pane" id="TRAIT_ID_TO_REPLACE">TAB_CONTENT_TO_REPLACE</div>';
     var synsListTempl = '<div class="list-group">LIST_CONTENT_TO_REPLACE</div>';
@@ -164,7 +164,7 @@ function processSynonym(word, allSyns) {
     var synsListItemContent = '';
     var synsListGroup = '';
 
-    ele.synonyms.forEach(function(syn) {
+    $.each(allSyns.children,function(_, syn) {
       synsListItemContent += synsListItemTempl
         .replace(/SYNONYM_CONTENT/g, syn.word)
         .replace(/SYNONYM_WEIGHT/g, syn.corr);
