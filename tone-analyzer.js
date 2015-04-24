@@ -84,10 +84,11 @@ ToneAnalyzer.prototype.synonym = function(params, callback) {
   var options = {
     method: 'POST',
     url: this.url + '/v1/synonym',
-    body: params.text || undefined,
+    body: params,
     json: true,
     headers: {
       'Authorization': this.auth,
+      'Content-type': 'application/json'
     }
   };
 
