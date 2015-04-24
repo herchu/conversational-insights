@@ -37,17 +37,17 @@ var personalityInsights = watson.personality_insights({
 
 var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
-  url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
+  url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
   username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
   password: 'SVciCpwt0b8x'
 });
 
-var toneAnalyzer = new ToneAnalyzer({
+/*var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
   url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
   username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
   password: 'SVciCpwt0b8x'
-});
+});*/
 
 app.get('/', function(req, res) {
   res.render('index');
@@ -84,7 +84,7 @@ app.post('/tone', function(req, res, next) {
 
 app.post('/synonym', function(req, res, next) {
   // get the message tone
-  toneAnalyzer.tone(req.body, function(err, results) {
+  toneAnalyzer.synonym(req.body, function(err, results) {
     if (err)
       return next(err);
     else

@@ -24,19 +24,29 @@ $(document).ready(function() {
     personImageUrl = 'images/app.png'; // Can be blank
 
   // Jquery variables
-  var $loading = $('loading-pi'),
+  var $loading = $('.loading-pi'),
       $to = $('.to'),
     $error = $('.pi-error'),
     $errorMsg = $('.pi-errorMsg'),
-    $results = $('.pi-results');
+    $results = $('.pi-results'),
+    $composer = $('.composer'),
+    $summaryTitle = $('.summary-title');
 
   /**
    * 1. Create the request
    * 2. Call the API
    * 3. Call the methods to display the results
    */
-  $('.analysis-btn').click(function(){
+  /*$('.analysis-btn').click(function(){
+   startPersonalityAnalysis();
+  });*/
+  $('input.to').blur(function(){
+   startPersonalityAnalysis();
+  });
+  
+  function startPersonalityAnalysis() {
     $('.analysis-btn').blur();
+    //$composer.hide();
     $loading.show();
     $error.hide();
     $results.hide();
@@ -49,7 +59,7 @@ $(document).ready(function() {
       url: '/profile',
       dataType: 'json',
       success: function(response) {
-        $loading.hide();
+       $loading.hide();
 
         if (response.error) {
           showError(response.error);
@@ -69,7 +79,7 @@ $(document).ready(function() {
         showError(error.error || error);
       }
     });
-  });
+  }
 
   /**
    * Display an error or a default message
@@ -86,7 +96,8 @@ $(document).ready(function() {
    * values.
    */
   function showTextSummary(data) {
-    console.log('showTextSummary()');
+    //console.log('showTextSummary()');
+		$summaryTitle.html($to.val()+"'s personality");
     var paragraphs = [
       assembleTraits(data.tree.children[0]),
       assembleFacets(data.tree.children[0]),

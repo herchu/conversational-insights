@@ -17,19 +17,20 @@
 
 'use strict';
 
-var word_to_category = d3.map();
-var category_to_word = d3.map();
-
-var $message = $('.message');
-var $tone_rslts = $('.tone_rslts');
-var $loading = $('.loading-tone');
-var $result = $('.results');
-
-var $synonyms = $('.synonyms');
-var $synonymsLoading = $('.loading-synonym');
-var $synonymsResults = $('.synonymsResults');
-
 $(function() {
+
+  var word_to_category = d3.map();
+  var category_to_word = d3.map();
+
+  var $message = $('.message');
+  var $tone_rslts = $('.tone_rslts');
+  var $loading = $('.loading-tone');
+  var $result = $('.results-tone');
+  var $composer = $('.composer');
+
+  var $synonyms = $('.synonyms');
+  var $synonymsLoading = $('.loading-synonym');
+  var $synonymsResults = $('.synonymsResults');
 
   if (getParameterByName('after') === 'true')
     $message.val(global.sample_text.after);
@@ -38,9 +39,6 @@ $(function() {
 
   if (getParameterByName('topn') !== '')
     global.top_n_weighted_positive_liwc = getParameterByName('topn');
-
-});
-
 
 // clear the message and result page
 $('.clean-btn').click(function(){
@@ -63,14 +61,24 @@ $('.analysis-btn').click(function(){
   });
 });
 
+$('.back-btn').click(function(){
+  $loading.hide();
+  $composer.show();
+  $tone_rslts.hide();
+  $synonyms.hide();
+});
+
 /**
  * start tone check.
  * @param  {[object]} tone_rslt: tone scores with linguistic evidence
  * @param  {[type]} text_to_analysis: the text to analyze
  */
 function doToneCheck(tone_rslt, text_to_analysis) {
+  console.log(text_to_analysis);
   $loading.hide();
-  $tone_rslts.slideToggle('slow');
+  $composer.hide();
+  $tone_rslts.show();
+  //$tone_rslts.slideToggle('slow');
 
   text_to_analysis = text_to_analysis
     .replace(/\r\n/g, '<br />')
@@ -106,7 +114,7 @@ function doToneCheck(tone_rslt, text_to_analysis) {
 // Do a quick rendering of the received tones and traits on HTML
 function renderTraits(tone_rslt) {
 //  console.log(tone_rslt);
-  $result.html('Results:<ul>');
+  $result.html('<ul>');
   for (var i = 0; i < tone_rslt.children.length; i++) {
     var cate = tone_rslt.children[i];
     console.log(cate);
@@ -140,7 +148,7 @@ function setupSynonymExpansion() {
     $('.synonymTabs').empty();
     $('.synonymTabContent').empty();
 
-    $.post('/synonym', { words: [word], limit: 4}, function(response) {
+    $.post('/synonym', { words: [word], limit: 3}, function(response) {
         processSynonym(word, response);
     });
   });
@@ -155,16 +163,15 @@ function processSynonym(word, allSyns) {
     '</b>.<br/>Positive correlations with each trait are shown in blue, ' +
     'negative correlations are red.</div>');
 
-  $.each(allSyns.children,function(_, ele) {
-    var tabContentTempl = '<h3>Trait: TRAIT_ID_TO_REPLACE</h3>'+
+  $.each(allSyns, function(_, ele) {
+    var tabContentTempl = '<h4>Trait: TRAIT_ID_TO_REPLACE</h4>'+
       '<div role="tabpanel" class="tab-pane" id="TRAIT_ID_TO_REPLACE">TAB_CONTENT_TO_REPLACE</div>';
     var synsListTempl = '<div class="list-group">LIST_CONTENT_TO_REPLACE</div>';
     var synsListItemTempl = '<a class="list-group-item synonym-list-item" >' +
       '<span class="badge">SYNONYM_WEIGHT</span>SYNONYM_CONTENT</a>';
     var synsListItemContent = '';
     var synsListGroup = '';
-
-    $.each(allSyns.children,function(_, syn) {
+    $.each(ele.synonyms,function(_, syn) {
       synsListItemContent += synsListItemTempl
         .replace(/SYNONYM_CONTENT/g, syn.word)
         .replace(/SYNONYM_WEIGHT/g, syn.corr);
@@ -253,3 +260,5 @@ function getParameterByName(name) {
   else
     return decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
+
+});
