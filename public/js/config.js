@@ -1,4 +1,5 @@
 // global variables
+
 var global = {
   highlight_animation_duration: 500,
   top_n_weighted_positive_liwc: 3,

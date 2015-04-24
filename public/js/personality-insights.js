@@ -24,7 +24,7 @@ $(document).ready(function() {
     personImageUrl = 'images/app.png'; // Can be blank
 
   // Jquery variables
-  var $loading = $('.pi-loading'),
+  var $loading = $('loading-pi'),
       $to = $('.to'),
     $error = $('.pi-error'),
     $errorMsg = $('.pi-errorMsg'),

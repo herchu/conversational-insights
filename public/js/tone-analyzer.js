@@ -22,8 +22,8 @@ var category_to_word = d3.map();
 
 var $message = $('.message');
 var $tone_rslts = $('.tone_rslts');
-var $loading = $('.loading');
-var $result = $('.result');
+var $loading = $('.loading-tone');
+var $result = $('.results');
 
 var $synonyms = $('.synonyms');
 var $synonymsLoading = $('.loading-synonym');
@@ -97,7 +97,7 @@ function doToneCheck(tone_rslt, text_to_analysis) {
       cateName = ele.substring(0, ele.indexOf('_' + global.word_trait_corr_type.positive));
     if (ele.indexOf('_' + global.word_trait_corr_type.negative) > 0)
       cateName = ele.substring(0, ele.indexOf('_' + global.word_trait_corr_type.negative));
-    $('.' + ele).css('color', global.color_schema[cateName]);
+    $('.' + ele).css('color', global.color_schema[cateName.toLowerCase()]);
   });
 
   setupSynonymExpansion();
@@ -105,7 +105,7 @@ function doToneCheck(tone_rslt, text_to_analysis) {
 
 // Do a quick rendering of the received tones and traits on HTML
 function renderTraits(tone_rslt) {
-  console.log(tone_rslt);
+//  console.log(tone_rslt);
   $result.html('Results:<ul>');
   for (var i = 0; i < tone_rslt.children.length; i++) {
     var cate = tone_rslt.children[i];
@@ -115,7 +115,7 @@ function renderTraits(tone_rslt) {
       var trait = cate.children[j];
       var div = $('<span>')
         .text(trait.name + ' (' + Math.floor(trait.score * 100) / 100 + ')')
-        .css('color', global.color_schema[trait.id]);
+        .css('color', global.color_schema[trait.id.toLowerCase()]);
       catdiv.append(div).append(' ');
     }
     $result.append(catdiv);
