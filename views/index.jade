@@ -1,0 +1,42 @@
+//- index.jade
+extends ./layout.jade
+
+block row-content
+  div.row
+    div.col-lg-8.col-md-8.col-xs-6(style='margin-top:15px;')
+        form.form-horizontal(method='post')
+          fieldset
+            div.form-group.row
+              div.col-lg-2.col-md-2.col-xs-4
+                label(for='to') To:
+              div.to.col-lg-10.col-md-10.col-xs-8
+                input.form-control(id='to', type='text', placeholder='@...')
+            div.form-group.row
+              div.col-lg-2.col-md-2.col-xs-4
+                label(for='message') Message:
+              div.col-lg-10.col-md-10.col-xs-8
+                textarea#message.message.form-control(name='message', rows='10', placeholder='Please enter the text to analyze ...', required='true')
+            div.form-group.row
+              div.col-lg-2.col-lg-offset-8.col-md-2.col-md-offset-8.col-xs-4.col-xs-offset-4
+                a.btn.btn-block.btn-default(role='button', onclick='clearMessage()') Clear
+              div.col-lg-2.col-md-2.col-xs-4
+                a.btn.btn-block(role='button', onclick='doAnalysis()') Analyze
+    div.col-lg-4.col-md-4.col-xs-6
+      h3 Personality
+  div.row(style='margin-top:15px;')
+    div.col-lg-12
+      div.row.loading(style='display:none')
+          div.col-lg-12.col-xs-12.text-center
+            img(src='images/watson.gif')
+    div.col-lg-12
+        div.tone_rslts(style='display:none;')
+          div.well
+            div.results
+            div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
+            div.output_message.form-control(contentEditable=true, style='overflow: auto; height:250px; ')
+        div.synonyms(style='display:none;')
+          h3 Synonyms
+          div.row.loading-synonym(style='display:none')
+              div.col-lg-12.col-xs-12.text-center
+                img(src='images/watson-gray.gif')
+            div.synonymsResults(style='display:none;')

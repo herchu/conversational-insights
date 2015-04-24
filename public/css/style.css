@@ -1,0 +1,65 @@
+.logo {
+    float: left;
+    margin-left: 25px;
+}
+
+.logo span img {
+    width: 260px;
+    height: auto;
+}
+
+.errorMsg {
+    font-weight: bold;
+    color: #FF5050;
+}
+
+rect {
+    rx: 2px;
+    rx: 2px;
+}
+
+.text-in-box {
+    fill: #111;
+}
+
+.text-above-box {
+    fill: #666;
+}
+
+.text-bellow-box {
+    fill: #666;
+}
+
+.text-analytical,
+.text-agreeable,
+.text-family_c,
+.text-causation {
+    fill: #eee;
+}
+
+.matched-word {
+    font-weight: bold;
+}
+
+.matched-word:hover {
+    font-style: italic;
+    cursor: pointer;
+}
+
+.text-mixed-positive,
+.text-mixed-negative {
+    opacity: 0;
+}
+
+.popover {
+    max-width: 100%;
+    /* Max Width of the popover (depending on the container!)*/
+}
+
+.badge-neg {
+    background-color: #F46D43;
+}
+
+.modal-backdrop {
+    z-index: 0;
+}

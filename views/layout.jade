@@ -1,0 +1,48 @@
+//- layout.jade
+doctype html
+html(lang='en')
+  head
+    block title
+      title Secretary
+
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='shortcut icon', href='/images/favicon.ico', type='image/x-icon')
+    link(rel='icon', href='/images/favicon.ico', type='image/x-icon')
+    link(rel='stylesheet', href='/css/watson-bootstrap-dark.css')
+    link(rel='stylesheet', href='/css/banner.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    div.container
+      div.row
+        div.col-lg-12
+          div.row.top-nav
+            div.col-lg-12
+              h3.heading.left
+                span World of Watson
+                | : Secretary
+              a.right(href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/') Watson Developer Cloud
+              span.powered.right Powered by:
+
+          div.row.header(style='padding-bottom:0px;')
+            div.avatar.img-container.col-lg-1.col-xs-1
+              img(src='/images/app.png')
+            div.col-lg-6.col-xs-6
+              h2 Secretary
+              p Secretary helps you write a Twitter direct message by telling you information
+                | about the recipient and the tone of your message. It uses the Tone Analyzer
+                | and Personality Insights Watson services.
+            div.col-lg-4.col-xs-4.build-your-own
+              h3 Build your own:
+              a.left.fork(href='https://bluemix.net/deploy?repository=https://github.com/germanattanasio/secretary.git') Fork and Deploy on Bluemix
+              a.right.fork(href='https://github.com/germanattanasio/secretary') Fork on Github
+      block row-content
+
+    script(type='text/javascript', src='/js/vendor/jquery-1.11.1.min.js')
+    script(type='text/javascript', src='/js/vendor/bootstrap.min.js')
+    script(type='text/javascript', src='/js/vendor/d3.v2.min.js')
+    script(type='text/javascript', src='/js/config.js')
+    script(type='text/javascript', src='/js/tone-analyzer.js')
