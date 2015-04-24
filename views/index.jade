@@ -3,7 +3,10 @@ extends ./layout.jade
 
 block row-content
   div.row
-    div.col-lg-8.col-md-8.col-xs-6(style='margin-top:15px;')
+    // Composer
+    div.col-lg-6.col-md-6.col-xs-6(style='margin-top:15px;')
+      h3 Message composer
+      div.well
         form.form-horizontal(method='post')
           fieldset
             div.form-group.row
@@ -21,38 +24,41 @@ block row-content
                 a.btn.btn-block.btn-defaultclean-btn(role='button') Clear
               div.col-lg-2.col-md-2.col-xs-4
                 a.btn.btn-block.analysis-btn(role='button') Analyze
-    div.col-lg-4.col-md-4.col-xs-6
+    // Tone
+    div.col-lg-6.col-md-6.col-xs-6(style='margin-top:15px;')
+      div.row.loading(style='display:none;')
+          div.col-lg-12.col-xs-12.text-center
+            img(src='images/watson.gif')    
+      div.tone_rslts(style='display:none;')
+        h3 Tone Analysis
+        div.well
+          div.results
+          div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
+          div.output_message.form-control(contentEditable=true, style='overflow: auto; height:250px; ')
+      div.synonyms(style='display:none;')
+        h3 Synonyms
+        div.row.loading-synonym(style='display:none')
+            div.col-lg-12.col-xs-12.text-center
+              img(src='images/watson-gray.gif')
+          div.synonymsResults(style='display:none;')
+  div.row
+    div.col-lg-12
       div.form-group.row.pi-loading.text-center.loading(style='display:none;')
         h2 &nbsp;
         img(src='images/watson-gray.gif')
       div.form-group.row.pi-error(style='display: none;')
         h2 &nbsp;
         div.well
-          p.pi-errorMsg
-      div.pi-results(style='display: none;')
-        h3(style='height: 29px;') Your Personality*
-        div.well
-          div.summary-div
-          div.text-right(style='color: gray')
-            em.small *Compared to most people who participated in our surveys.
+          p.pi-errorMsg Error message here
+    // Personality
+    div.col-lg-8.col-md-8.col-xs-6
       div.pi-results(style='display: none;')
         h3 Visualization of Personality Data
         div.well#vizcontainer
-
-  div.row(style='margin-top:15px;')
-    div.col-lg-12
-      div.row.loading(style='display:none')
-          div.col-lg-12.col-xs-12.text-center
-            img(src='images/watson.gif')
-    div.col-lg-12
-        div.tone_rslts(style='display:none;')
-          div.well
-            div.results
-            div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
-            div.output_message.form-control(contentEditable=true, style='overflow: auto; height:250px; ')
-        div.synonyms(style='display:none;')
-          h3 Synonyms
-          div.row.loading-synonym(style='display:none')
-              div.col-lg-12.col-xs-12.text-center
-                img(src='images/watson-gray.gif')
-            div.synonymsResults(style='display:none;')
+    div.col-lg-4.col-md-4.col-xs-6      
+      div.pi-results(style='display: none;')
+        h3(style='height: 29px;') Your Personality *
+        div.well
+          div.summary-div
+          div.text-right(style='color: gray')
+            em.small * Compared to most people who participated in our surveys.

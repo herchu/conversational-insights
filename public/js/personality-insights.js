@@ -20,7 +20,7 @@
 $(document).ready(function() {
 
   var widgetId = 'vizcontainer', // Must match the ID in index.jade
-    widgetWidth = 700, widgetHeight = 700, // Default width and height
+    widgetWidth = 600, widgetHeight = 600, // Default width and height
     personImageUrl = 'images/app.png'; // Can be blank
 
   // Jquery variables
