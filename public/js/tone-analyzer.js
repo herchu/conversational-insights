@@ -50,6 +50,7 @@ $('.clean-btn').click(function(){
 $('.analysis-btn').click(function(){
   $loading.show();
   $tone_rslts.hide();
+  $help.hide();
 
   var text = $message.val();
 
