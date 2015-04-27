@@ -26,6 +26,7 @@ $(document).ready(function() {
   // Jquery variables
   var $loading = $('.loading-pi'),
       $to = $('.to'),
+    $help = $('.help'),
     $error = $('.pi-error'),
     $errorMsg = $('.pi-errorMsg'),
     $results = $('.pi-results'),
@@ -47,6 +48,7 @@ $(document).ready(function() {
   function startPersonalityAnalysis() {
     $('.analysis-btn').blur();
     //$composer.hide();
+    $help.hide()
     $loading.show();
     $error.hide();
     $results.hide();

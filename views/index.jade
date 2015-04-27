@@ -15,7 +15,7 @@ block row-content
               div.col-lg-2.col-md-2.col-xs-4
                 label(for='to') To:
               div.col-lg-10.col-md-10.col-xs-8
-                input.to.form-control(id='to', type='text', placeholder='@... Type a Twitter username')
+                input.to.form-control(id='to', type='text', placeholder='@...')
             div.form-group.row
               div.col-lg-2.col-md-2.col-xs-4
                 label(for='message') Message:
@@ -23,20 +23,19 @@ block row-content
                 textarea#message.message.form-control(name='message', rows='10', placeholder='Please enter the text to analyze ...', required='true')
             div.form-group.row
               div.col-lg-2.col-lg-offset-8.col-md-2.col-md-offset-8.col-xs-4.col-xs-offset-4
-                a.btn.btn-block.btn-defaultclean-btn(role='button') Clear
+                a.btn.btn-block.btn-default.clean-btn(role='button') Clear
               div.col-lg-2.col-md-2.col-xs-4
                 a.btn.btn-block.analysis-btn(role='button') Analyze
-      //div.row.loading-tone(style='display:none;')
-      //  div.col-lg-12.col-xs-12.text-center
-      //    img(src='images/watson.gif')    
-      div.tone_rslts(style='display:none;')
+      div.results-tone(style='display:none;')
         h3 Tone Analysis
         div.well
-          div.results-tone
-          div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
-          div.output_message.form-control(contentEditable=false, style='overflow: auto; height:250px; ')
           div.form-group.row
-            div.col-lg-2.col-md-2.col-xs-4
+            div.results-tone-text
+          div.form-group.row
+            div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
+            div.output_message.form-control(contentEditable=false, style='overflow: auto; height:250px; ')
+          div.form-group.row
+            div.col-lg-2.col-lg-offset-10.col-md-2.col-md-offset-10.col-xs-4.col-xs-offset-4
               a.btn.btn-block.back-btn(role='button') Back
       // Personality visualization
       //div.form-group.row.loading-pi.text-center(style='display:none;')
@@ -54,12 +53,28 @@ block row-content
 
     // Second, narrower column
     div.col-lg-4.col-md-4.col-xs-6(style='margin-top:15px;')
+      // Help
+      div.help
+        h3 Tips
+        p To start, type the recipient Twitter ID. <i>Secretary</i> will 
+          report an analysis of this person's personality using 
+          a(target='_blank', href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html') IBM Watson Personality Insights
+          | . Use this information to compose a message that will resonate better in this person.
+        p While you are composing the message, click <b>Analyze</b> 
+          | to validate your desired message tone, with an analysis built by 
+          a(target='_blank', href='https://watson-tone-docs.mybluemix.net') Text Tone Analyzer 
+          | service. 
+        p Learn more about these and other services from 
+          a(target='_blank', href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/') Watson Developer Cloud
+          | .
+      // Tips - synonyms
+      //div.results-tone(style='display:none;')
       // Synonyms
       div.synonyms(style='display:none;')
         h3 Synonyms
         div.row.loading-synonym(style='display:none')
-            div.col-lg-12.col-xs-12.text-center
-              img(src='images/watson.gif')
+          div.col-lg-12.col-xs-12.text-center
+            img(src='images/watson.gif')
           div.synonymsResults(style='display:none;')
       div.row.loading-pi.text-center(style='display:none;')
         h2 &nbsp;

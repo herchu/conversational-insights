@@ -22,15 +22,15 @@ $(function() {
   var word_to_category = d3.map();
   var category_to_word = d3.map();
 
-  var $message = $('.message');
-  var $tone_rslts = $('.tone_rslts');
-  var $loading = $('.loading-tone');
-  var $result = $('.results-tone');
-  var $composer = $('.composer');
-
-  var $synonyms = $('.synonyms');
-  var $synonymsLoading = $('.loading-synonym');
-  var $synonymsResults = $('.synonymsResults');
+  var $message = $('.message'),
+    $help = $('.help'),
+    $tone_rslts = $('.results-tone'),
+    $loading = $('.loading-tone'),
+    $result = $('.results-tone-text'),
+    $composer = $('.composer'),
+    $synonyms = $('.synonyms'),
+    $synonymsLoading = $('.loading-synonym'),
+    $synonymsResults = $('.synonymsResults');
 
   if (getParameterByName('after') === 'true')
     $message.val(global.sample_text.after);
@@ -62,6 +62,7 @@ $('.analysis-btn').click(function(){
 });
 
 $('.back-btn').click(function(){
+  $help.show();
   $loading.hide();
   $composer.show();
   $tone_rslts.hide();
