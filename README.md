@@ -1,10 +1,10 @@
-# Secretary
+# Message Assistant
 
-  Secretary helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and [Personality Insights][service_url] Watson services.
+  Message Assistant helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and [Personality Insights][service_url] Watson services.
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
 
-Demo: http://secretary-ny.mybluemix.net/
+Demo: http://message-assistant.mybluemix.net/
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/germanattanasio/secretary)
 
