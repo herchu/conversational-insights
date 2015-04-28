@@ -38,9 +38,11 @@ $(document).ready(function() {
    * 2. Call the API
    * 3. Call the methods to display the results
    */
-  /*$('.analysis-btn').click(function(){
-   startPersonalityAnalysis();
-  });*/
+
+/* 
+ * Hook the onBlur event of the "To:" entry field to trigger Personality Insights analysis.
+ * 
+
   $('input.to').blur(function(){
    startPersonalityAnalysis();
   });
@@ -82,7 +84,7 @@ $(document).ready(function() {
       }
     });
   }
-
+*/
   /**
    * Display an error or a default message
    * @param  {String} error The error
