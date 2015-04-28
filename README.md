@@ -6,7 +6,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 
 Demo: http://message-assistant.mybluemix.net/
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/germanattanasio/secretary)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/herchu/watson-message-assistant)
 
 
 ## Running locally
