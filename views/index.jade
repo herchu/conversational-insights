@@ -6,7 +6,7 @@ block row-content
     // Composer
     div.col-lg-8.col-md-8.col-xs-6(style='margin-top:15px; position:relative;')
       div.overlay.loading-tone(style='display:none;')
-        img(src='images/watson.gif')    
+        img(src='images/watson.gif')
       h3.composer Message composer
       div.well.composer
         form.form-horizontal(method='post')
@@ -32,7 +32,9 @@ block row-content
           div.form-group.row
             div.results-tone-text
           div.form-group.row
-            div This is the analyzed text. Colors are related to traits. Click on a word for synonym expansion:
+            div This is your message with words highlighted in the color that reflects their corresponding trait.
+                b  Click on a word to see synonyms and the traits that each one communicates
+                |:
             div.output_message.form-control(contentEditable=false, style='overflow: auto; height:250px; ')
           div.form-group.row
             div.col-lg-2.col-lg-offset-10.col-md-2.col-md-offset-10.col-xs-4.col-xs-offset-4
@@ -56,15 +58,15 @@ block row-content
       // Help
       div.help
         h3 Tips
-        p To start, type the recipient Twitter ID. <i>Message Assistant</i> will 
-          report an analysis of this person's personality using 
+        p To start, type the recipient Twitter ID. <i>Message Assistant</i> will
+          report an analysis of this person's personality using
           a(target='_blank', href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html') IBM Watson Personality Insights
           | . Use this information to compose a message that will resonate better in this person.
-        p While you are composing the message, click <b>Analyze</b> 
-          | to validate your desired message tone, with an analysis built by 
-          a(target='_blank', href='https://watson-tone-docs.mybluemix.net') Text Tone Analyzer 
-          | service. 
-        p Learn more about these and other services from 
+        p While you are composing the message, click <b>Analyze</b>
+          | to validate your desired message tone, with an analysis built by
+          a(target='_blank', href='https://watson-tone-docs.mybluemix.net') Text Tone Analyzer
+          | service.
+        p Learn more about these and other services from
           a(target='_blank', href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/') Watson Developer Cloud
           | .
       // Tips - synonyms
