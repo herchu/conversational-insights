@@ -8,6 +8,18 @@
     height: auto;
 }
 
+#twitter-logo {
+    width: 25px;
+    float: left;
+    margin-right: 5px;
+}
+
+.header .api-label {
+    color: #00b2ef;
+    display: inline;
+    font-weight: 400;
+}
+
 .errorMsg {
     font-weight: bold;
     color: #FF5050;

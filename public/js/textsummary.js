@@ -83,6 +83,18 @@ function compareByValue(o1, o2) {
   }
 }
 
+// Takes a sentence in second person and make it third person
+function replacePerson(sentence) {
+  sentence = sentence.replace("you're", "they're");
+  sentence =  sentence.replace("You're", "They're");
+  sentence = sentence.replace("yourself", "themself");
+  sentence =  sentence.replace("Yourself", "Themself");
+  sentence = sentence.replace("your", "their");
+  sentence = sentence.replace("Your", "Their");
+  sentence = sentence.replace("you", "they");
+  return sentence.replace("You", "They");
+}
+
 function assembleTraits(personalityTree) {
   var sentences = [];
   var big5elements = [];
@@ -111,13 +123,13 @@ function assembleTraits(personalityTree) {
     case 2:
       // Report 1 adjective.
       adj = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
-      sentences.push('You are ' + adj + '.');
+      sentences.push('They are ' + adj + '.');
       break;
     case 3:
       // Report 2 adjectives.
       adj1 = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
       adj2 = getCircumplexAdjective(relevantBig5[1], relevantBig5[2], 1);
-      sentences.push('You are ' + adj1 + ' and ' + adj2 + '.');
+      sentences.push('They are ' + adj1 + ' and ' + adj2 + '.');
       break;
     case 4:
     case 5:
@@ -125,7 +137,7 @@ function assembleTraits(personalityTree) {
       adj1 = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
       adj2 = getCircumplexAdjective(relevantBig5[1], relevantBig5[2], 1);
       adj3 = getCircumplexAdjective(relevantBig5[2], relevantBig5[3], 2);
-      sentences.push('You are ' + adj1 + ', ' + adj2 + ' and ' + adj3 + '.');
+      sentences.push('They are ' + adj1 + ', ' + adj2 + ' and ' + adj3 + '.');
       break;
   }
 
@@ -151,9 +163,9 @@ function assembleFacets(personalityTree) {
 
   // Assemble an adjective and description for the two most important facets.
   var info = getFacetInfo(facetElements[0]);
-  sentences.push('You are ' + info.term + ': ' + info.description + '.');
+  sentences.push('They are ' + info.term + ': ' + info.description + '.');
   info = getFacetInfo(facetElements[1]);
-  sentences.push('You are ' + info.term + ': ' + info.description + '.');
+  sentences.push('They are ' + info.term + ': ' + info.description + '.');
 
   // If all the facets correspond to the same feature, continue until a
   // different parent feature is found.
@@ -164,7 +176,7 @@ function assembleFacets(personalityTree) {
     }
   }
   info = getFacetInfo(facetElements[i]);
-  sentences.push('And you are ' + info.term + ': ' + info.description + '.');
+  sentences.push('And they are ' + info.term + ': ' + info.description + '.');
 
   return sentences;
 }
@@ -197,32 +209,32 @@ function assembleValues(valuesTree) {
     // Assemble the first 'both' sentence.
     switch (intervalFor(valuesList[0].percentage)) {
       case 0:
-        sentence = 'You are relatively unconcerned with both '.
+        sentence = 'They are relatively unconcerned with both '.
         concat(info1.term).
         concat(' and ').
         concat(info2.term).
         concat('.');
         break;
       case 1:
-        sentence = 'You don\'t find either '.
+        sentence = 'They don\'t find either '.
         concat(info1.term).
         concat(' or ').
         concat(info2.term).
-        concat(' to be particularly motivating for you.');
+        concat(' to be particularly motivating for them.');
         break;
       case 2:
-        sentence = 'You value both '.
+        sentence = 'They value both '.
         concat(info1.term).
         concat(' and ').
         concat(info2.term).
         concat(' a bit.');
         break;
       case 3:
-        sentence = 'You consider both '.
+        sentence = 'They consider both '.
         concat(info1.term).
         concat(' and ').
         concat(info2.term).
-        concat(' to guide a large part of what you do.');
+        concat(' to guide a large part of what they do.');
         break;
     }
     sentences.push(sentence);
@@ -236,30 +248,30 @@ function assembleValues(valuesTree) {
       // Process it this way because the code is the same.
       switch (intervalFor(valuesList[i].percentage)) {
         case 0:
-          sentence = 'You are relatively unconcerned with '.
+          sentence = 'They are relatively unconcerned with '.
           concat(valuesInfo[i].term).
           concat(': ').
           concat(valuesInfo[i].description.toLowerCase()).
           concat('.');
           break;
         case 1:
-          sentence = 'You don\'t find '.
+          sentence = 'They don\'t find '.
           concat(valuesInfo[i].term).
-          concat(' to be particularly motivating for you: ').
+          concat(' to be particularly motivating for them: ').
           concat(valuesInfo[i].description.toLowerCase()).
           concat('.');
           break;
         case 2:
-          sentence = 'You value '.
+          sentence = 'They value '.
           concat(valuesInfo[i].term).
           concat(' a bit more: ').
           concat(valuesInfo[i].description.toLowerCase()).
           concat('.');
           break;
         case 3:
-          sentence = 'You consider '.
+          sentence = 'They consider '.
           concat(valuesInfo[i].term).
-          concat(' to guide a large part of what you do: ').
+          concat(' to guide a large part of what they do: ').
           concat(valuesInfo[i].description.toLowerCase()).
           concat('.');
           break;
@@ -293,22 +305,22 @@ function assembleNeeds(needsTree) {
   // Form the right sentence for the single need.
   switch (intervalFor(needsList[0].percentage)) {
     case 0:
-      sentence = 'Experiences that make you feel high '.
+      sentence = 'Experiences that make them feel high '.
       concat(word).
-      concat(' are generally unappealing to you.');
+      concat(' are generally unappealing to them.');
       break;
     case 1:
       sentence = 'Experiences that give a sense of '.
       concat(word).
-      concat(' hold some appeal to you.');
+      concat(' hold some appeal to them.');
       break;
     case 2:
-      sentence = 'You are motivated to seek out experiences that provide a strong feeling of '.
+      sentence = 'They are motivated to seek out experiences that provide a strong feeling of '.
       concat(word).
       concat('.');
       break;
     case 3:
-      sentence = 'More than most people, your choices are driven by a desire for '.
+      sentence = 'More than most people, their choices are driven by a desire for '.
       concat(word).
       concat('.');
       break;
@@ -359,6 +371,7 @@ function getFacetInfo(f) {
     t = data.LowTerm.toLowerCase();
     d = data.LowDescription.toLowerCase();
   }
+  d = replacePerson(d);
 
   return {
     name: f.id,
@@ -370,7 +383,9 @@ function getFacetInfo(f) {
 function getInfoForValue(v) {
   var data = valuesData[v.id.replace(/[_ ]/g, '-')][0];
   var d = v.percentage > 0.5 ? data.HighDescription : data.LowDescription;
-
+  console.log(d);
+  d = replacePerson(d);
+  console.log(d);
   return {
     name: v.id,
     term: data.Term.toLowerCase(),

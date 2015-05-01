@@ -32,9 +32,15 @@ html(lang='en')
               img(src='/images/app.png')
             div.col-lg-6.col-xs-6
               h2 Message Assistant
-              p This app helps you write a Twitter direct message by telling you information
-                | about the recipient and the tone of your message. It uses the Tone Analyzer
-                | and Personality Insights Watson services.
+              p Message Assistant is a tool that helps you write a message by giving you insight
+                | into the recipient's personality and the tone of your message. The app uses
+                | two Watson APIs:
+              p
+                a(class="api-label" target='_blank', href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html') Personality Insights
+                |&nbsp; analyzes the personality of your target recipient.
+              p
+                a(class="api-label" target='_blank', href='https://watson-tone-docs.mybluemix.net') Tone Analyzer
+                |&nbsp; breaks down the tone of your message, word-by-word.
             div.col-lg-4.col-xs-4.build-your-own
               h3 Build your own:
               a.left.fork(href='https://bluemix.net/deploy?repository=https://github.com/herchu/watson-message-assistant.git') Fork and Deploy on Bluemix
