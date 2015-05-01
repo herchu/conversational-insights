@@ -42,7 +42,8 @@ rect {
 }
 
 .matched-word:hover {
-    font-style: italic;
+    background-color: #C8D2D2;
+    text-decoration: underline;
     cursor: pointer;
 }
 
