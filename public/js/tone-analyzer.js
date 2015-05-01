@@ -150,8 +150,15 @@ function setupSynonymExpansion() {
     $('.synonymTabs').empty();
     $('.synonymTabContent').empty();
 
-    $.post('/synonym', { words: [word], limit: 3}, function(response) {
-        processSynonym(word, response);
+    $.post('/synonym', { words: [word], limit: 5}, function(response) {
+      
+        // API returns list of traits, and synonyms within each
+        // [{"trait":"openness","headword":"acknowledge","synonyms":[{"word":"adjudge","corr":-0.0378},{"word":"react","corr":-0.038},
+        // Swap this by a list of words, with traits for each of them
+        // [{"word":"adjudge", "traits": [{"trait":"openness", "corr":-0.0378....
+        var data = preprocessSynonyms(word, response);
+
+        processSynonym(word, data);
     });
   });
 }
@@ -165,25 +172,26 @@ function processSynonym(word, allSyns) {
     '</b>.<br/>Positive correlations with each trait are shown in blue, ' +
     'negative correlations are red.</div>');
 
-  $.each(allSyns, function(_, ele) {
-    var tabContentTempl = '<h4>Trait: TRAIT_ID_TO_REPLACE</h4>'+
+console.log(allSyns);
+  allSyns.forEach(function(ele) {
+    var tabContentTempl = '<h4>Synonym: WORD_TO_REPLACE</h4>'+
       '<div role="tabpanel" class="tab-pane" id="TRAIT_ID_TO_REPLACE">TAB_CONTENT_TO_REPLACE</div>';
     var synsListTempl = '<div class="list-group">LIST_CONTENT_TO_REPLACE</div>';
     var synsListItemTempl = '<a class="list-group-item synonym-list-item" >' +
-      '<span class="badge">SYNONYM_WEIGHT</span>SYNONYM_CONTENT</a>';
+      '<span class="badge">TRAIT_WEIGHT</span>TRAIT_CONTENT</a>';
     var synsListItemContent = '';
     var synsListGroup = '';
-    $.each(ele.synonyms,function(_, syn) {
+    ele.traits.forEach(function(trait) {
       synsListItemContent += synsListItemTempl
-        .replace(/SYNONYM_CONTENT/g, syn.word)
-        .replace(/SYNONYM_WEIGHT/g, syn.corr);
+        .replace(/TRAIT_CONTENT/g, trait.trait)
+        .replace(/TRAIT_WEIGHT/g, trait.corr);
     });
 
     synsListGroup = synsListTempl.replace(/LIST_CONTENT_TO_REPLACE/g, synsListItemContent);
 
     $('.synonymsResults')
       .append(tabContentTempl
-                .replace(/TRAIT_ID_TO_REPLACE/g, ele.trait)
+                .replace(/WORD_TO_REPLACE/g, ele.word)
                 .replace(/TAB_CONTENT_TO_REPLACE/g,
               synsListGroup)
       );
@@ -261,6 +269,41 @@ function getParameterByName(name) {
     return '';
   else
     return decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+function preprocessSynonyms(word, response) {
+  var synonyms = {};
+  response.forEach(function(elem) {
+    if (elem.headword!=word) {
+      return; // Ignore this one. Should never happen if we requested this word anyway
+    }
+    var trait = elem.trait;
+    elem.synonyms.forEach(function(syn) {
+      if (!(syn.word in synonyms)) {
+        synonyms[syn.word] = { word: syn.word, max: syn.corr, min: syn.corr, traits: [ { trait: elem.trait, corr: syn.corr } ] };
+      } else {
+        var old = synonyms[syn.word];
+        synonyms[syn.word] = {
+          word: syn.word,
+          min: Math.min(syn.corr, old.min),
+          max: Math.max(syn.corr, old.min),
+          traits: old.traits.concat({ trait: elem.trait, corr: syn.corr })
+        };
+      }
+    });
+  });
+  // We want them to be sorted by 'significance', defining now as the max amplitude in correlation of different
+  // traits -- those are the synonyms that stand out!
+  // Convert to an array so we can sort it  
+  var synlist = Object.keys(synonyms).map(function(k) { 
+    // While we are at it, also sort the traits
+    synonyms[k].traits.sort(function(a, b) { return b.corr - a.corr; });
+    return synonyms[k]; 
+  })
+  // Sort it
+  synlist.sort(function(a, b) { return (b.max-b.min) - (a.max-a.min); });
+  // Now discard the min/max values (used only for sorting) and return the words and traits only
+  return synlist.map(function(syn) { return { "word": syn.word, "traits": syn.traits }; });
 }
 
 });
