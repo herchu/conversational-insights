@@ -383,9 +383,7 @@ function getFacetInfo(f) {
 function getInfoForValue(v) {
   var data = valuesData[v.id.replace(/[_ ]/g, '-')][0];
   var d = v.percentage > 0.5 ? data.HighDescription : data.LowDescription;
-  console.log(d);
   d = replacePerson(d);
-  console.log(d);
   return {
     name: v.id,
     term: data.Term.toLowerCase(),

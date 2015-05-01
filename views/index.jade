@@ -4,7 +4,7 @@ extends ./layout.jade
 block row-content
   div.row
     // Composer
-    div.col-lg-8.col-md-8.col-xs-6(style='margin-top:15px; position:relative;')
+    div.col-lg-8.col-md-8.col-xs-6(id="large-col" style='margin-top:15px; position:relative;')
       div.overlay.loading-tone(style='display:none;')
         img(src='images/watson.gif')
       h3.composer Message composer
@@ -39,9 +39,19 @@ block row-content
           div.form-group.row
             div.col-lg-2.col-lg-offset-10.col-md-2.col-md-offset-10.col-xs-4.col-xs-offset-4
               a.btn.btn-block.back-btn(role='button') Back
+      div.row.loading-pi.text-center(style='display:none;')
+        h2 &nbsp;
+        img(src='images/watson.gif')
+      div.pi-results(style='display: none;')
+        img(id="twitter-logo" src='images/twitter_logo.png')
+        h3.summary-title(style='height: 29px;') Your Personality *
+        div.well
+          div.summary-div
+          div.text-right(style='color: gray')
+            em.small * Compared to most people who participated in our surveys.
       // Personality visualization
       //div.form-group.row.loading-pi.text-center(style='display:none;')
-      div.row.loading-pi.text-center(style='display:none;')
+      //div.row.loading-pi.text-center(style='display:none;')
         h2 &nbsp;
         img(src='images/watson.gif')
       div.form-group.row.pi-error(style='display: none;')
@@ -54,7 +64,7 @@ block row-content
         div.well#vizcontainer
 
     // Second, narrower column
-    div.col-lg-4.col-md-4.col-xs-6(style='margin-top:15px;')
+    div.col-lg-4.col-md-4.col-xs-6(id="small-col" style='margin-top:15px;')
       // Help
       div.help
         h3 Tips
@@ -79,13 +89,3 @@ block row-content
           div.col-lg-12.col-xs-12.text-center
             img(src='images/watson.gif')
         div.synonymsResults(style='display:none;')
-      div.row.loading-pi.text-center(style='display:none;')
-        h2 &nbsp;
-        img(src='images/watson.gif')
-      div.pi-results(style='display: none;')
-        img(id="twitter-logo" src='images/twitter_logo.png')
-        h3.summary-title(style='height: 29px;') Your Personality *
-        div.well
-          div.summary-div
-          div.text-right(style='color: gray')
-            em.small * Compared to most people who participated in our surveys.

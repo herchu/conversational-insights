@@ -15,7 +15,7 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  overflow-y: scroll; 
+  overflow-y: scroll;
 }
 body {
   margin: 0;
@@ -4722,7 +4722,7 @@ a.thumbnail.active {
 .list-group-item {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 3px 15px;
   margin-bottom: -1px;
   background-color: #ffffff;
   border: 1px solid #dddddd;

@@ -51,6 +51,11 @@ $('.analysis-btn').click(function(){
   $loading.show();
   $tone_rslts.hide();
   $help.hide();
+  changeColSize(document.getElementById("large-col"), 8, 12);
+
+  $('html, body').animate({
+      scrollTop: $("#large-col").offset().top
+  }, 1000);
 
   var text = $message.val();
 
@@ -68,7 +73,29 @@ $('.back-btn').click(function(){
   $composer.show();
   $tone_rslts.hide();
   $synonyms.hide();
+  changeColSize(document.getElementById("large-col"), 12, 8);
 });
+
+/**
+ * grows and shrinks a col from curWidth to newWidth.
+ * @param  {[object]} col: object for which to change width
+ * @param  {[int]} curWidth: current width of the object
+ * @param  {[int]} newWidth: desired width of the object
+ */
+function changeColSize(col, curWidth, newWidth) {
+  var regexLg = new RegExp('(\\s|^)col-lg-' + curWidth.toString() + '(\\s|$)');
+  col.className = col.className.replace(regexLg,("col-lg-" + newWidth.toString() + " "));
+  var regexMd = new RegExp('(\\s|^)col-md-' + curWidth.toString() + '(\\s|$)');
+  col.className = col.className.replace(regexMd,(" col-md-" + newWidth.toString() + " "));
+}
+
+/**
+ * convert the input decimal string to a percentage string.
+ * @param  {[string]} decimalString: decimal between -1 and 1
+ */
+function convertToPercentage(decimalString) {
+  return (Math.round(10*(parseFloat(decimalString)*100))/10).toString() + "%"
+}
 
 /**
  * start tone check.
@@ -115,7 +142,7 @@ function doToneCheck(tone_rslt, text_to_analysis) {
 
 // Do a quick rendering of the received tones and traits on HTML
 function renderTraits(tone_rslt) {
-//  console.log(tone_rslt);
+  console.log(tone_rslt);
   $result.html('<ul>');
   for (var i = 0; i < tone_rslt.children.length; i++) {
     var cate = tone_rslt.children[i];
@@ -124,7 +151,7 @@ function renderTraits(tone_rslt) {
     for (var j = 0; j < cate.children.length; j++) {
       var trait = cate.children[j];
       var div = $('<span>')
-        .text(trait.name + ' (' + Math.floor(trait.score * 100) / 100 + ')')
+        .text(trait.name + ' (' + convertToPercentage(trait.score.toString()) + ')')
         .css('color', global.color_schema[trait.id.toLowerCase()]);
       catdiv.append(div).append(' ');
     }
@@ -140,6 +167,7 @@ function addHighlightSpan(data, search, stylecls) {
 
 function setupSynonymExpansion() {
   $('.matched-word').click(function() {
+    changeColSize(document.getElementById("large-col"), 12, 8);
     $synonyms.show();
     $synonymsLoading.show();
     $synonymsResults.hide();
@@ -151,7 +179,7 @@ function setupSynonymExpansion() {
     $('.synonymTabContent').empty();
 
     $.post('/synonym', { words: [word], limit: 5}, function(response) {
-      
+
         // API returns list of traits, and synonyms within each
         // [{"trait":"openness","headword":"acknowledge","synonyms":[{"word":"adjudge","corr":-0.0378},{"word":"react","corr":-0.038},
         // Swap this by a list of words, with traits for each of them
@@ -172,7 +200,9 @@ function processSynonym(word, allSyns) {
     '</b>.<br/>Positive correlations with each trait are shown in blue, ' +
     'negative correlations are red.</div>');
 
-console.log(allSyns);
+  // Only display top 5 synonym results
+  allSyns = allSyns.slice(0,5);
+
   allSyns.forEach(function(ele) {
     var tabContentTempl = '<h4>Synonym: WORD_TO_REPLACE</h4>'+
       '<div role="tabpanel" class="tab-pane" id="TRAIT_ID_TO_REPLACE">TAB_CONTENT_TO_REPLACE</div>';
@@ -201,6 +231,7 @@ console.log(allSyns);
   $('.badge').each(function() {
     if (parseFloat($(this).html()) < 0)
       $(this).attr('class', 'badge badge-neg');
+    $(this)[0].innerText = convertToPercentage($(this)[0].innerText);
   });
 
 }
@@ -294,11 +325,11 @@ function preprocessSynonyms(word, response) {
   });
   // We want them to be sorted by 'significance', defining now as the max amplitude in correlation of different
   // traits -- those are the synonyms that stand out!
-  // Convert to an array so we can sort it  
-  var synlist = Object.keys(synonyms).map(function(k) { 
+  // Convert to an array so we can sort it
+  var synlist = Object.keys(synonyms).map(function(k) {
     // While we are at it, also sort the traits
     synonyms[k].traits.sort(function(a, b) { return b.corr - a.corr; });
-    return synonyms[k]; 
+    return synonyms[k];
   })
   // Sort it
   synlist.sort(function(a, b) { return (b.max-b.min) - (a.max-a.min); });
