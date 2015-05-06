@@ -1,5 +1,9 @@
 # Conversational Insights
 
+This demo is part of a Drop In Lab during World of Watson 2015 at NYC.
+You can **[download the lab instructions](Watson Lab Instructions - Conversational Insights.pdf)** to run the lab yourself.
+You may also want to follow the other labs to learn about different services:  [Image Analysis](https://github.com/aldelucca1/image-analysis) and [Personalized recommendations](https://github.com/germanattanasio/personalized-recommendations)
+
   Conversational Insights helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and [Personality Insights][service_url] Watson services.
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
