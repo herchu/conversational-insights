@@ -11,7 +11,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 
 Lab Instructions: [INSTRUCTIONS](INSTRUCTIONS.md)
 
-Demo: http://message-assistant.mybluemix.net/
+Demo: https://conversational-insights.mybluemix.net/
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/conversational-insights)
 
