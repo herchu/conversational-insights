@@ -31,8 +31,8 @@ var twitterHelper = new TwitterHelper(config.twitter);
 
 var personalityInsights = watson.personality_insights({
   version: 'v2',
-  username: 'bd342b24-1a0b-410a-ba8f-49c941f5f46a',
-  password: 'IPrLqcrllemV'
+  username: '<username>',
+  password: '<password>'
 });
 
 var toneAnalyzer = new ToneAnalyzer({
