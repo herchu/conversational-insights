@@ -1,14 +1,15 @@
 # World of Watson Labs - Conversational Insights
 
-This demo is part of a Drop In Lab during World of Watson 2015 at NYC.
-You can **[download the lab instructions](Watson Lab Instructions - Conversational Insights.pdf)** to run the lab yourself.
-You may also want to follow the other labs to learn about different services:  [Image Analysis](https://github.com/aldelucca1/image-analysis) and [Personalized recommendations](https://github.com/germanattanasio/personalized-recommendations)
+ Conversational Insights helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and [Personality Insights][pi_service] Watson services.
 
- Conversational Insights helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and Personality Insights Watson services.
+This demo is part of a Drop In Lab during World of Watson 2015 at NYC.
+You may also want to follow the other labs to learn about other Watson services like Visual Recognition or Tradeoff Analytics:
+ * [Image Analysis](https://github.com/watson-developer-cloud/image-analysis): Visual Recognition and Machine Translation.
+ * [Personalized recommendations](https://github.com/watson-developer-cloud/personalized-recommendations): Concept Insights, Question and Answer and Tradeoff Analytics.
 
 So let’s get started. The first thing to do is to build out the shell of our application in Bluemix.
 
-## Creating a [IBM Bluemix][bluemix] Account
+## Creating a IBM Bluemix Account
 
   1. Go to [https://ace.ng.bluemix.net/](https://ace.ng.bluemix.net/)
   2. Create a Bluemix account if required.
@@ -56,7 +57,7 @@ While this application already uses Watson cognitive capabilities by understandi
   
 We are going to demonstrate how easy it is to use the Watson services on Bluemix to add functionality to existing applications. Our current application analyzes the tone of a message. However let's say we also want to know the message recipient's individual characteristics, like personality, so that we can tune the message for this person.
 
-Luckily, we’ve already started the process to do this. To fully implement the recipient's analysus we are going to edit our application code to use the Personality Insights service analysis.
+Luckily, we’ve already started the process to do this. To fully implement the recipient's analysus we are going to edit our application code to use the [Personality Insights] service analysis.
   
 ## Modify the existing application
 
@@ -108,8 +109,8 @@ To test out our application, navigate back to your application homepage on Bluem
 
 # Congratulations 
 
-You have completed the Image Analysis Lab! :bowtie:
+You have completed the Conversational Insights Lab! :bowtie:
 
 [bluemix]: https://console.ng.bluemix.net/
 [wdc_services]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html
-[mt_service]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/machine-translation.html
+[pi_service]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html
