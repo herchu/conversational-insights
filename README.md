@@ -8,6 +8,8 @@ You may also want to follow the other labs to learn about different services:  [
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
 
+Lab Instructions: [INSTRUCTIONS](INSTRUCTIONS.md)
+
 Demo: http://message-assistant.mybluemix.net/
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/herchu/watson-message-assistant)
