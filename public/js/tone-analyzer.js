@@ -54,7 +54,7 @@ $('.analysis-btn').click(function(){
   changeColSize(document.getElementById("large-col"), 8, 12);
 
   $('html, body').animate({
-      scrollTop: $("#large-col").offset().top
+      scrollTop: $('#large-col').offset().top
   }, 1000);
 
   var text = $message.val();
@@ -73,7 +73,7 @@ $('.back-btn').click(function(){
   $composer.show();
   $tone_rslts.hide();
   $synonyms.hide();
-  changeColSize(document.getElementById("large-col"), 12, 8);
+  changeColSize(document.getElementById('large-col'), 12, 8);
 });
 
 /**

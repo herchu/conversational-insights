@@ -54,7 +54,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile', function(req, res, next) {
-  twitterHelper.showUser(req.query.username,function(err, user){
+  twitterHelper.showUser(req.query.username,function(err){
     if (err)
       return next(err);
 
