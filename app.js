@@ -38,16 +38,9 @@ var personalityInsights = watson.personality_insights({
 var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
   url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
-  password: 'SVciCpwt0b8x'
+  username: '3857b93b-3cb3-4e05-a950-ec51d617f47d',
+  password: '2B3Lfel0EJoO'
 });
-
-/*var toneAnalyzer = new ToneAnalyzer({
-  version: 'v1',
-  url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
-  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
-  password: 'SVciCpwt0b8x'
-});*/
 
 app.get('/', function(req, res) {
   res.render('index');
