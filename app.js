@@ -31,15 +31,15 @@ var twitterHelper = new TwitterHelper(config.twitter);
 
 var personalityInsights = watson.personality_insights({
   version: 'v2',
-  username: 'bd342b24-1a0b-410a-ba8f-49c941f5f46a',
-  password: 'IPrLqcrllemV'
+  username: "e9ba4d00-dd28-4ac2-9f56-602664c63901",
+  password: "Kw30VZ2ir9Vp"
 });
 
 var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
   url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
-  password: 'SVciCpwt0b8x'
+  username: "d7e4115c-7c80-48ef-8c40-5364b285ad5e",
+  password: "VoTtOJtjhBh0"
 });
 
 /*var toneAnalyzer = new ToneAnalyzer({
