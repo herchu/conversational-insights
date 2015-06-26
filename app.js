@@ -38,8 +38,8 @@ var personalityInsights = watson.personality_insights({
 var toneAnalyzer = new ToneAnalyzer({
   version: 'v1',
   url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-  username: '3857b93b-3cb3-4e05-a950-ec51d617f47d',
-  password: '2B3Lfel0EJoO'
+  username: 'bd3486d0-841c-44f6-bb1c-62a8a7e5afe7',
+  password: '7QdJYIz2nJPo'
 });
 
 app.get('/', function(req, res) {
