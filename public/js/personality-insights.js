@@ -78,7 +78,7 @@ $(document).ready(function() {
         $loading.hide();
         var error;
         try {
-          error = JSON.parse(xhr.responseText);
+          error = JSON.parse(xhr.responseText || {});
         } catch(e) {}
         showError(error.error || error);
       }
