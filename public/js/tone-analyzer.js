@@ -60,11 +60,14 @@ $('.analysis-btn').click(function(){
   var text = $message.val();
 
   // GET /tone with the text to get words matched with LIWC categories
-  $.post('/tone', {
-    text: text
-  }, function(response) {
-    doToneCheck(response, text);
-  });
+   $.post('/tone', {
+     text: text
+  }).done(function(response) {
+     doToneCheck(response, text);
+  })
+  .always(function(){
+    $loading.hide();
+   });
 });
 
 $('.back-btn').click(function(){
