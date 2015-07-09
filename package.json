@@ -1,5 +1,5 @@
 {
-  "name": "secretary",
+  "name": "conversational-insights",
   "version": "0.0.1",
   "description": "Application that help you write Twitter direct messages",
   "dependencies": {
@@ -9,19 +9,19 @@
     "jade": "~1.9.2",
     "request": "~2.55.0",
     "twitter": "~0.2.13",
-    "watson-developer-cloud": "~0.9.9"
+    "watson-developer-cloud": "~0.9.22"
   },
   "engines": {
     "node": ">=0.10.38"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/germanattanasio/secretary.git"
+    "url": "https://github.com/watson-developer-cloud/conversational-insights.git"
   },
   "author": "German Attanasio Ruiz",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/germanattanasio/secretary/issues"
+    "url": "https://github.com/watson-developer-cloud/conversational-insights/issues"
   },
   "scripts": {
     "start": "node app.js"
