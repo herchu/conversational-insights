@@ -19,7 +19,6 @@
 var express = require('express');
 var app = express();
 var watson = require('watson-developer-cloud');
-var ToneAnalyzer = require('./tone-analyzer');
 var TwitterHelper = require('./twitter-helper');
 var config = require('./config');
 

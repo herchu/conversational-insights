@@ -1,6 +1,6 @@
 {
   "name": "conversational-insights",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Application that help you write Twitter direct messages",
   "dependencies": {
     "body-parser": "~1.12.3",
@@ -9,7 +9,7 @@
     "jade": "~1.9.2",
     "request": "~2.55.0",
     "twitter": "~0.2.13",
-    "watson-developer-cloud": "~0.9.22"
+    "watson-developer-cloud": "~0.9.23"
   },
   "engines": {
     "node": ">=0.10.38"
