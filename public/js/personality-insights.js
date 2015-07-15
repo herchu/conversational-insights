@@ -41,11 +41,12 @@ $(document).ready(function() {
 /*
  * Hook the onBlur event of the "To:" entry field to trigger Personality Insights analysis.
  *
- */
+
   $('input.to').blur(function(){
    startPersonalityAnalysis();
   });
-
+ */
+ 
   function startPersonalityAnalysis() {
     $('.analysis-btn').blur();
     //$composer.hide();
