@@ -35,11 +35,10 @@ var personalityInsights = watson.personality_insights({
   password: '<password>'
 });
 
-var toneAnalyzer = new ToneAnalyzer({
+var toneAnalyzer = watson.tone_analyzer({
   version: 'v1',
-  url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-  username: 'bd3486d0-841c-44f6-bb1c-62a8a7e5afe7',
-  password: '7QdJYIz2nJPo'
+  username: '<username>',
+  password: '<password>'
 });
 
 app.get('/', function(req, res) {
