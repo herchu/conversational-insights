@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*global $:false, d3:false */
+/*global $:false */
 
 'use strict';
 
@@ -85,14 +85,14 @@ function compareByValue(o1, o2) {
 
 // Takes a sentence in second person and make it third person
 function replacePerson(sentence) {
-  sentence = sentence.replace("you're", "they're");
-  sentence =  sentence.replace("You're", "They're");
-  sentence = sentence.replace("yourself", "themself");
-  sentence =  sentence.replace("Yourself", "Themself");
-  sentence = sentence.replace("your", "their");
-  sentence = sentence.replace("Your", "Their");
-  sentence = sentence.replace("you", "they");
-  return sentence.replace("You", "They");
+  sentence = sentence.replace('you\'re', 'they\'re');
+  sentence =  sentence.replace('You\'re', 'They\'re');
+  sentence = sentence.replace('yourself', 'themself');
+  sentence =  sentence.replace('Yourself', 'Themself');
+  sentence = sentence.replace('your', 'their');
+  sentence = sentence.replace('Your', 'Their');
+  sentence = sentence.replace('you', 'they');
+  return sentence.replace('You', 'They');
 }
 
 function assembleTraits(personalityTree) {

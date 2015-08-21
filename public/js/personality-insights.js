@@ -25,12 +25,11 @@ $(document).ready(function() {
 
   // Jquery variables
   var $loading = $('.loading-pi'),
-      $to = $('.to'),
+    $to = $('.to'),
     $help = $('.help'),
     $error = $('.pi-error'),
     $errorMsg = $('.pi-errorMsg'),
     $results = $('.pi-results'),
-    $composer = $('.composer'),
     $summaryTitle = $('.summary-title');
 
   /**
@@ -39,18 +38,18 @@ $(document).ready(function() {
    * 3. Call the methods to display the results
    */
 
-/* 
+/*
  * Hook the onBlur event of the "To:" entry field to trigger Personality Insights analysis.
  */
 
   $('input.to').blur(function(){
    startPersonalityAnalysis();
   });
-  
+ 
   function startPersonalityAnalysis() {
     $('.analysis-btn').blur();
     //$composer.hide();
-    $help.hide()
+    $help.hide();
     $loading.show();
     $error.hide();
     $results.hide();
@@ -78,7 +77,7 @@ $(document).ready(function() {
         $loading.hide();
         var error;
         try {
-          error = JSON.parse(xhr.responseText);
+          error = JSON.parse(xhr.responseText || {});
         } catch(e) {}
         showError(error.error || error);
       }
@@ -101,7 +100,7 @@ $(document).ready(function() {
    */
   function showTextSummary(data) {
     //console.log('showTextSummary()');
-		$summaryTitle.html($to.val()+"'s personality");
+		$summaryTitle.html($to.val()+'\'s personality');
     var paragraphs = [
       assembleTraits(data.tree.children[0]),
       assembleFacets(data.tree.children[0]),
@@ -197,7 +196,7 @@ function showVizualization(theProfile) {
   widget.dimH = widgetHeight;
   widget.dimW = widgetWidth;
   widget.d3vis.attr('width', widget.dimW).attr('height', widget.dimH);
-  widget.d3vis.attr('viewBox', "0 0 " + widget.dimW + ", " + widget.dimH);
+  widget.d3vis.attr('viewBox', '0 0 ' + widget.dimW + ', ' + widget.dimH);
   renderChart.call(widget);
   widget.expandAll.call(widget);
   if (personImageUrl)

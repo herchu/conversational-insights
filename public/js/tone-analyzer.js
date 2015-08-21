@@ -51,20 +51,23 @@ $('.analysis-btn').click(function(){
   $loading.show();
   $tone_rslts.hide();
   $help.hide();
-  changeColSize(document.getElementById("large-col"), 8, 12);
+  changeColSize(document.getElementById('large-col'), 8, 12);
 
   $('html, body').animate({
-      scrollTop: $("#large-col").offset().top
+      scrollTop: $('#large-col').offset().top
   }, 1000);
 
   var text = $message.val();
 
   // GET /tone with the text to get words matched with LIWC categories
-  $.post('/tone', {
-    text: text
-  }, function(response) {
-    doToneCheck(response, text);
-  });
+   $.post('/tone', {
+     text: text
+  }).done(function(response) {
+     doToneCheck(response, text);
+  })
+  .always(function(){
+    $loading.hide();
+   });
 });
 
 $('.back-btn').click(function(){
@@ -73,7 +76,7 @@ $('.back-btn').click(function(){
   $composer.show();
   $tone_rslts.hide();
   $synonyms.hide();
-  changeColSize(document.getElementById("large-col"), 12, 8);
+  changeColSize(document.getElementById('large-col'), 12, 8);
 });
 
 /**
@@ -84,9 +87,9 @@ $('.back-btn').click(function(){
  */
 function changeColSize(col, curWidth, newWidth) {
   var regexLg = new RegExp('(\\s|^)col-lg-' + curWidth.toString() + '(\\s|$)');
-  col.className = col.className.replace(regexLg,("col-lg-" + newWidth.toString() + " "));
+  col.className = col.className.replace(regexLg,('col-lg-' + newWidth.toString() + ' '));
   var regexMd = new RegExp('(\\s|^)col-md-' + curWidth.toString() + '(\\s|$)');
-  col.className = col.className.replace(regexMd,(" col-md-" + newWidth.toString() + " "));
+  col.className = col.className.replace(regexMd,(' col-md-' + newWidth.toString() + ' '));
 }
 
 /**
@@ -94,7 +97,7 @@ function changeColSize(col, curWidth, newWidth) {
  * @param  {[string]} decimalString: decimal between -1 and 1
  */
 function convertToPercentage(decimalString) {
-  return (Math.round(10*(parseFloat(decimalString)*100))/10).toString() + "%"
+  return (Math.round(10*(parseFloat(decimalString)*100))/10).toString() + '%'
 }
 
 /**
@@ -151,7 +154,7 @@ function renderTraits(tone_rslt) {
     for (var j = 0; j < cate.children.length; j++) {
       var trait = cate.children[j];
       var div = $('<span>')
-        .text(trait.name + ' (' + convertToPercentage(trait.score.toString()) + ')')
+        .text(trait.name + ' (' + convertToPercentage(trait.normalized_score.toString()) + ')')
         .css('color', global.color_schema[trait.id.toLowerCase()]);
       catdiv.append(div).append(' ');
     }
@@ -167,7 +170,7 @@ function addHighlightSpan(data, search, stylecls) {
 
 function setupSynonymExpansion() {
   $('.matched-word').click(function() {
-    changeColSize(document.getElementById("large-col"), 12, 8);
+    changeColSize(document.getElementById('large-col'), 12, 8);
     $synonyms.show();
     $synonymsLoading.show();
     $synonymsResults.hide();
@@ -305,36 +308,43 @@ function getParameterByName(name) {
 function preprocessSynonyms(word, response) {
   var synonyms = {};
   response.forEach(function(elem) {
-    if (elem.headword!=word) {
+    if (elem.headword !== word) {
       return; // Ignore this one. Should never happen if we requested this word anyway
     }
-    var trait = elem.trait;
+
     elem.synonyms.forEach(function(syn) {
       if (!(syn.word in synonyms)) {
-        synonyms[syn.word] = { word: syn.word, max: syn.corr, min: syn.corr, traits: [ { trait: elem.trait, corr: syn.corr } ] };
+        synonyms[syn.word] = {
+          word: syn.word,
+          max: syn.weight,
+          min: syn.weight,
+          traits: [{ trait: elem.trait, corr: syn.weight }]
+        };
       } else {
         var old = synonyms[syn.word];
         synonyms[syn.word] = {
           word: syn.word,
-          min: Math.min(syn.corr, old.min),
-          max: Math.max(syn.corr, old.min),
-          traits: old.traits.concat({ trait: elem.trait, corr: syn.corr })
+          min: Math.min(syn.weight, old.min),
+          max: Math.max(syn.weight, old.min),
+          traits: old.traits.concat({ trait: elem.trait, corr: syn.weight })
         };
       }
     });
   });
-  // We want them to be sorted by 'significance', defining now as the max amplitude in correlation of different
+
+  // We want them to be sorted by 'significance',
+  // defining now as the max amplitude in correlation of different
   // traits -- those are the synonyms that stand out!
   // Convert to an array so we can sort it
   var synlist = Object.keys(synonyms).map(function(k) {
     // While we are at it, also sort the traits
     synonyms[k].traits.sort(function(a, b) { return b.corr - a.corr; });
     return synonyms[k];
-  })
+  });
   // Sort it
   synlist.sort(function(a, b) { return (b.max-b.min) - (a.max-a.min); });
   // Now discard the min/max values (used only for sorting) and return the words and traits only
-  return synlist.map(function(syn) { return { "word": syn.word, "traits": syn.traits }; });
+  return synlist.map(function(syn) { return { 'word': syn.word, 'traits': syn.traits }; });
 }
 
 });

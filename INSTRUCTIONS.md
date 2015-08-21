@@ -2,7 +2,7 @@
 
  Conversational Insights helps you write a Twitter direct message by telling you information about the recipient and the tone of your message. It uses the Tone Analyzer and [Personality Insights][pi_service] Watson services.
 
-This demo is part of a Drop In Lab during World of Watson 2015 at NYC.
+This demo was originally created as a part of a Drop In Lab during World of Watson 2015 at NYC.
 You may also want to follow the other labs to learn about other Watson services like Visual Recognition or Tradeoff Analytics:
  * [Image Analysis](https://github.com/watson-developer-cloud/image-analysis): Visual Recognition and Machine Translation.
  * [Personalized recommendations](https://github.com/watson-developer-cloud/personalized-recommendations): Concept Insights, Question and Answer and Tradeoff Analytics.
@@ -21,7 +21,7 @@ So let’s get started. The first thing to do is to build out the shell of our a
 
   1. Click the button below to fork the project into IBM DevOps Services and deploy your own instance of this application on [IBM Bluemix][bluemix].
 
-  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/herchu/message-assistant)
+  [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/conversational-insights)
 
   2. From here you will be taken to a Bluemix page, where you will be prompted to name your app. A sample name is provided for you, but feel free to give your application any name you like (if the name is taken by another user you will be prompted to try another name).
 
@@ -50,14 +50,11 @@ This demo simulates you are composing a direct message to a twitter user. You wi
   
 The Watson Tone Analyzer service will show a report or your message's tone in various dimensions. This helps you understand how the recipient will receive the message: are you being too negative? Overly confident, cheerful? This service can also suggest synonyms for replacements, if you want to customize your message by going higher or lower in the different traits measured. Click on any colored word to get a list of suggested synonyms.
 
-We are going to demonstrate how easy it is to use the Watson services on Bluemix to add functionality to existing applications. 
-
 While this application already uses Watson cognitive capabilities by understanding your message's tone, we are also adding an understanding of the recipient's as an individual to better help you compose a message that resonates on him/her.
-
   
 We are going to demonstrate how easy it is to use the Watson services on Bluemix to add functionality to existing applications. Our current application analyzes the tone of a message. However let's say we also want to know the message recipient's individual characteristics, like personality, so that we can tune the message for this person.
 
-Luckily, we’ve already started the process to do this. To fully implement the recipient's analysus we are going to edit our application code to use the [Personality Insights] service analysis.
+Luckily, we’ve already started the process to do this. To fully implement the recipient's analysis we are going to edit our application code to use the [Personality Insights] service analysis.
   
 ## Modify the existing application
 
@@ -70,11 +67,9 @@ Luckily, we’ve already started the process to do this. To fully implement the 
 
   ![code-tree](instructions/code-tree.png)
 
- 4.  Locate the comment starting in line 43: "Hook the onBlur event ....". Close this comment, and remove the comment closing mark “*/” which appears after function `startPersonalityAnalysis()` in line 87.
+ 4.  Locate the comment starting in line 43: "Hook the onBlur event ....". Close this comment, and remove the comment closing mark “*/” which appears after function `startPersonalityAnalysis()` in line 48.
 
   ![code-comment1](instructions/code-comment1.png)
-
-  ![code-comment2](instructions/code-comment2.png)
 
 Note that now the new function listens for the onBlur event of the “To:” entry field. When you type a twitter screen name, it will GET an API URL in the application, which first imports the twitter data of this user, then uses the Personality Insights API to analyze its personality traits. The UI will now show a summary of the recipient's personality with a visualization when you type the user name.
 
@@ -104,6 +99,8 @@ Note that now the new function listens for the onBlur event of the “To:” ent
 ## Test
 
 To test out our application, navigate back to your application homepage on Bluemix. Select the URL next to “Route” in the same way that we launched our previously unfinished application before.
+
+In the new version of the application, you will be able to enter a Twitter handle and see the personality traits of that person or group show under the tone analyzer box. For this example we used "IBMWatson", but feel free to use whichever Twitter handle you like.
 
   ![page-pi](instructions/page-pi.png)
 

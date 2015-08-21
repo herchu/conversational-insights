@@ -19,7 +19,6 @@
 var express = require('express');
 var app = express();
 var watson = require('watson-developer-cloud');
-var ToneAnalyzer = require('./tone-analyzer');
 var TwitterHelper = require('./twitter-helper');
 var config = require('./config');
 
@@ -31,30 +30,22 @@ var twitterHelper = new TwitterHelper(config.twitter);
 
 var personalityInsights = watson.personality_insights({
   version: 'v2',
-  username: "e9ba4d00-dd28-4ac2-9f56-602664c63901",
-  password: "Kw30VZ2ir9Vp"
+  username: '<username>',
+  password: '<password>'
 });
 
-var toneAnalyzer = new ToneAnalyzer({
+var toneAnalyzer = watson.tone_analyzer({
   version: 'v1',
-  url: 'https://gateway.watsonplatform.net/tone-analyzer-beta/api',
-  username: "d7e4115c-7c80-48ef-8c40-5364b285ad5e",
-  password: "VoTtOJtjhBh0"
+  username: '<username>',
+  password: '<password>'
 });
-
-/*var toneAnalyzer = new ToneAnalyzer({
-  version: 'v1',
-  url: 'https://gateway.watsonplatform.net/tone-checker-beta/api',
-  username: 'aac49432-3c7f-44bb-8b13-6075df38e448',
-  password: 'SVciCpwt0b8x'
-});*/
 
 app.get('/', function(req, res) {
   res.render('index');
 });
 
 app.get('/profile', function(req, res, next) {
-  twitterHelper.showUser(req.query.username,function(err, user){
+  twitterHelper.showUser(req.query.username,function(err){
     if (err)
       return next(err);
 
