@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 /* 
  * Hook the onBlur event of the "To:" entry field to trigger Personality Insights analysis.
- * 
+ */
 
   $('input.to').blur(function(){
    startPersonalityAnalysis();
@@ -84,7 +84,7 @@ $(document).ready(function() {
       }
     });
   }
-*/
+
   /**
    * Display an error or a default message
    * @param  {String} error The error
